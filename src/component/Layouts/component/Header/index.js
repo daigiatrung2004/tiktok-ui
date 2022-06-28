@@ -1,14 +1,44 @@
-import { faCheckCircle, faCircleNotch, faCircleXmark, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+import {
+    faCheckCircle,
+    faCircleNotch,
+    faCircleQuestion,
+    faCircleXmark,
+    faEarthAsia,
+    faEllipsisVertical,
+    faKeyboard,
+    faMagnifyingGlass,
+    faPlus
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react/headless';
-import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
 import 'tippy.js/dist/tippy.css';
+import classNames from 'classnames/bind';
+import styles from './header.module.scss';
 import { images } from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/component/poper';
-import styles from './header.module.scss';
+import Button from '~/component/Button';
+import Menu from '~/component/poper/Menu';
+
+import { types, sizes } from '~/util/constant';
 
 const cx = classNames.bind(styles);
+
+const MENU_LIST = [
+    {
+        icon: <FontAwesomeIcon icon={faEarthAsia} />,
+        title: 'Tiếng Việt'
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+        title: 'Phản hồi và trợ giúp',
+        to: '/Following'
+    },
+    {
+        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        title: 'Phim tắt trên bàn phím'
+    }
+];
 
 function Header() {
     const [searchAccounts, setSearchAccounts] = useState([]);
@@ -63,12 +93,28 @@ function Header() {
                             <FontAwesomeIcon icon={faCircleXmark} />
                         </button>
                         <FontAwesomeIcon className={cx('loading')} icon={faCircleNotch} />
-                        <button className={cx('btn-search')}>
+                        <button className={cx('btn-search')} disabled>
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </button>
                     </div>
                 </Tippy>
-                <div className="action"></div>
+                <div className={cx('action')}>
+                    <Button
+                        type={types.buttonType.d}
+                        sizeStyle={sizes.m}
+                        leftIcon={<FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>}
+                    >
+                        Tải lên
+                    </Button>
+                    <Button primary sizeStyle={sizes.m} onClick={() => alert('xin chao')}>
+                        Đăng nhập
+                    </Button>
+                    <Menu className={cx('menu-list')} items={MENU_LIST}>
+                        <button className={cx('more-btn')}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </button>
+                    </Menu>
+                </div>
             </div>
         </div>
     );
