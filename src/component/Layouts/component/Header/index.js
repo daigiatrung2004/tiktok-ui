@@ -1,33 +1,49 @@
-import { useEffect, useState } from 'react';
 import {
+    faArrowRightFromBracket,
     faCheckCircle,
     faCircleNotch,
     faCircleQuestion,
     faCircleXmark,
     faEarthAsia,
     faEllipsisVertical,
+    faGear,
     faKeyboard,
     faMagnifyingGlass,
-    faPlus
+    faPlus,
+    faPaperPlane
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Tippy from '@tippyjs/react/headless';
-import 'tippy.js/dist/tippy.css';
+import Tippy from '@tippyjs/react';
+import TippyHeadLess from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-import styles from './header.module.scss';
+import { useEffect, useState } from 'react';
+import 'tippy.js/dist/tippy.css';
 import { images } from '~/assets/images';
-import { Wrapper as PopperWrapper } from '~/component/poper';
 import Button from '~/component/Button';
+import { Wrapper as PopperWrapper } from '~/component/poper';
 import Menu from '~/component/poper/Menu';
-
-import { types, sizes } from '~/util/constant';
+import styles from './header.module.scss';
+import { faTiktok } from '@fortawesome/free-brands-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { sizes } from '~/util/constant';
 
 const cx = classNames.bind(styles);
 
 const MENU_LIST = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
-        title: 'Tiếng Việt'
+        title: 'Tiếng Việt',
+        children: {
+            title: 'Ngôn ngữ',
+            data: [
+                {
+                    title: 'Tiếng Việt'
+                },
+                {
+                    title: 'Tiếng Anh'
+                }
+            ]
+        }
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -43,18 +59,49 @@ const MENU_LIST = [
 function Header() {
     const [searchAccounts, setSearchAccounts] = useState([]);
 
+    const changeHandle = (menuItem) => {
+        console.log(menuItem);
+    };
+
+    const user = true;
+
     useEffect(() => {
         setTimeout(() => {
             setSearchAccounts([1, 2, 3]);
         }, 1000);
     }, []);
 
+    const USER_LIST = [
+        {
+            icon: <FontAwesomeIcon icon={faUser} />,
+            title: 'Xem hồ sơ',
+            to: '/@hoaa'
+        },
+        {
+            icon: <FontAwesomeIcon icon={faTiktok} />,
+            title: 'Nhận xu',
+            to: '/coin'
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Cài đặt',
+            to: '/settings'
+        },
+        ...MENU_LIST,
+        {
+            icon: <FontAwesomeIcon icon={faArrowRightFromBracket} />,
+            title: 'Đăng xuất',
+            to: '/logout',
+            seperate: true
+        }
+    ];
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <img src={images.logo} alt="logo" />
-                <Tippy
-                    visible={searchAccounts.length > 0}
+                <TippyHeadLess
+                    // visible={searchAccounts.length > 0}
                     interactive
                     render={(attrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
@@ -97,22 +144,42 @@ function Header() {
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </button>
                     </div>
-                </Tippy>
+                </TippyHeadLess>
                 <div className={cx('action')}>
-                    <Button
-                        type={types.buttonType.d}
-                        sizeStyle={sizes.m}
-                        leftIcon={<FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>}
-                    >
-                        Tải lên
-                    </Button>
-                    <Button primary sizeStyle={sizes.m} onClick={() => alert('xin chao')}>
-                        Đăng nhập
-                    </Button>
-                    <Menu className={cx('menu-list')} items={MENU_LIST}>
-                        <button className={cx('more-btn')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </button>
+                    {user ? (
+                        <>
+                            <Tippy delay={[0, 200]} content="Tin nhắn" placement="bottom">
+                                <button className={cx('btn-icons')}>
+                                    <FontAwesomeIcon icon={faPaperPlane} />
+                                </button>
+                            </Tippy>
+                        </>
+                    ) : (
+                        <>
+                            <Button
+                                text
+                                sizeStyle={sizes.m}
+                                leftIcon={<FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>}
+                            >
+                                Tải lên
+                            </Button>
+                            <Button primary sizeStyle={sizes.m} onClick={() => alert('xin chao')}>
+                                Đăng nhập
+                            </Button>
+                        </>
+                    )}
+                    <Menu className={cx('menu-list')} items={user ? USER_LIST : MENU_LIST} onChange={changeHandle}>
+                        {user ? (
+                            <img
+                                src="https://p16-sign-sg.tiktokcdn.com/aweme/720x720/tiktok-obj/1665504715984898.jpeg?x-expires=1657022400&x-signature=kC7IIa2gJG7ErOFurDA6HRDtUUs%3D"
+                                alt="Nguyễn Văn A"
+                                className={cx('user-avatar')}
+                            />
+                        ) : (
+                            <button className={cx('more-btn')}>
+                                <FontAwesomeIcon icon={faEllipsisVertical} />
+                            </button>
+                        )}
                     </Menu>
                 </div>
             </div>

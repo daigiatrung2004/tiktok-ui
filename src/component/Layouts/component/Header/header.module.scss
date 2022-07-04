@@ -12,6 +12,7 @@
 }
 
 .inner {
+    padding: 0px var(--default-layout-spacer);
     height: 100%;
     width: var(--default-layout-width, 1150px);
     display: flex;
@@ -134,8 +135,32 @@
 }
 
 // menu button
-.more-btn {
-    font-size: 20px;
-    margin-left: 16px;
-    padding: 4px 8px;
+.action {
+    display: flex;
+    align-items: center;
+
+    .btn-icons {
+        background-color: transparent;
+        font-size: 2.2rem;
+        padding: 3px 3px 0;
+        margin-left: 16px;
+        color: #161823;
+        cursor: pointer;
+    }
+
+    .user-avatar {
+        height: 32px;
+        width: 32px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-left: 16px;
+        cursor: pointer;
+    }
+
+    .more-btn {
+        font-size: 20px;
+        margin-left: 16px;
+        padding: 4px 8px;
+        cursor: pointer;
+    }
 }

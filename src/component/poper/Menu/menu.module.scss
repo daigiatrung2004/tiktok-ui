@@ -6,20 +6,54 @@
     display: flex;
     justify-content: flex-start;
     width: 100%;
-    padding: 11px 16px;
+    padding: 11px var(--default-layout-spacer);
     background-color: var(--white);
     margin-left: 0;
+    line-height: 1.8rem;
+    color: var(--text-color);
 
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 700;
 
     cursor: pointer;
 
+    &.seperate {
+        border-top: 1px solid rgba(22, 24, 35, 0.12);
+    }
+
     &:hover {
-        background: rgba(22, 24, 35, 0.03);
+        background: rgba(22, 24, 35, 0.06);
     }
 }
 
 .menu-items {
     padding-bottom: 8px;
+}
+
+// chilren menu
+.header {
+    height: 50px;
+    position: relative;
+    font-weight: 600;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    margin-top: -8px;
+    user-select: none;
+}
+
+.icon {
+    position: relative;
+    margin-left: 28px;
+    padding-right: 15px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.header-title {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    width: 100%;
 }
