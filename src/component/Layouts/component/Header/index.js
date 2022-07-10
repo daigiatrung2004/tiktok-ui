@@ -9,8 +9,7 @@ import {
     faGear,
     faKeyboard,
     faMagnifyingGlass,
-    faPlus,
-    faPaperPlane
+    faPlus
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
@@ -26,6 +25,8 @@ import styles from './header.module.scss';
 import { faTiktok } from '@fortawesome/free-brands-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { sizes } from '~/util/constant';
+import { MessageIcon } from '~/component/icons';
+import Image from '~/component/Image';
 
 const cx = classNames.bind(styles);
 
@@ -150,7 +151,7 @@ function Header() {
                         <>
                             <Tippy delay={[0, 200]} content="Tin nhắn" placement="bottom">
                                 <button className={cx('btn-icons')}>
-                                    <FontAwesomeIcon icon={faPaperPlane} />
+                                    <MessageIcon />
                                 </button>
                             </Tippy>
                         </>
@@ -170,7 +171,7 @@ function Header() {
                     )}
                     <Menu className={cx('menu-list')} items={user ? USER_LIST : MENU_LIST} onChange={changeHandle}>
                         {user ? (
-                            <img
+                            <Image
                                 src="https://p16-sign-sg.tiktokcdn.com/aweme/720x720/tiktok-obj/1665504715984898.jpeg?x-expires=1657022400&x-signature=kC7IIa2gJG7ErOFurDA6HRDtUUs%3D"
                                 alt="Nguyễn Văn A"
                                 className={cx('user-avatar')}
