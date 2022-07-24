@@ -1,31 +1,25 @@
 import {
     faArrowRightFromBracket,
-    faCheckCircle,
-    faCircleNotch,
     faCircleQuestion,
-    faCircleXmark,
     faEarthAsia,
     faEllipsisVertical,
     faGear,
     faKeyboard,
-    faMagnifyingGlass,
     faPlus
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
-import TippyHeadLess from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
 import 'tippy.js/dist/tippy.css';
 import { images } from '~/assets/images';
 import Button from '~/component/Button';
-import { Wrapper as PopperWrapper } from '~/component/poper';
 import Menu from '~/component/poper/Menu';
 import styles from './header.module.scss';
 import { faTiktok } from '@fortawesome/free-brands-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { sizes } from '~/util/constant';
-import { MessageIcon } from '~/component/icons';
+import { InboxIcon, MessageIcon } from '~/component/icons';
+import Search from '~/component/Layouts/component/Search';
 import Image from '~/component/Image';
 
 const cx = classNames.bind(styles);
@@ -58,19 +52,11 @@ const MENU_LIST = [
 ];
 
 function Header() {
-    const [searchAccounts, setSearchAccounts] = useState([]);
-
     const changeHandle = (menuItem) => {
         console.log(menuItem);
     };
 
     const user = true;
-
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchAccounts([1, 2, 3]);
-        }, 1000);
-    }, []);
 
     const USER_LIST = [
         {
@@ -101,57 +87,18 @@ function Header() {
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <img src={images.logo} alt="logo" />
-                <TippyHeadLess
-                    // visible={searchAccounts.length > 0}
-                    interactive
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                <div className={cx('accountTitle')}>Tài khoản</div>
-                                {searchAccounts.map((data, index) => {
-                                    return (
-                                        <div className={cx('accountItem')} key={index}>
-                                            <img
-                                                src="https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/a0ee4b1e1cbdbb1f0c2645ee8bb75e40~c5_300x300.webp?x-expires=1655726400&x-signature=L42uHKSaHBj1KB8i3azupxcUS4I%3D"
-                                                alt="account"
-                                                className={cx('avatar')}
-                                            />
-                                            <div className={cx('info')}>
-                                                <h4 className={cx('name')}>
-                                                    <span>Nguyễn Văn A</span>
-                                                    <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />
-                                                </h4>
-                                                <p className={cx('account')}>ngvaaaa</p>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input
-                            type="text"
-                            placeholder="Tìm kiếm tài khoản và video"
-                            spellCheck={false}
-                            className="input-search"
-                        />
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        <FontAwesomeIcon className={cx('loading')} icon={faCircleNotch} />
-                        <button className={cx('btn-search')} disabled>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </TippyHeadLess>
+                <Search />
                 <div className={cx('action')}>
                     {user ? (
                         <>
                             <Tippy delay={[0, 200]} content="Tin nhắn" placement="bottom">
                                 <button className={cx('btn-icons')}>
                                     <MessageIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 200]} content="Hộp thư" placement="bottom">
+                                <button className={cx('btn-icons')}>
+                                    <InboxIcon />
                                 </button>
                             </Tippy>
                         </>
