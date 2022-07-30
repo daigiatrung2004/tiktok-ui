@@ -19,6 +19,7 @@
     }
 
     input {
+        font-family: var(--font-family);
         font-size: 1.6rem;
         caret-color: rgba(254, 44, 85, 1);
         background-color: transparent;
@@ -59,6 +60,7 @@
     }
 
     .btn-search {
+        display: flex;
         width: var(--search-button-width);
         font-size: 24px;
         padding: 11px 16px 11px 12px;

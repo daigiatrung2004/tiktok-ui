@@ -28,6 +28,9 @@
 
 .menu-items {
     padding-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
 }
 
 // chilren menu

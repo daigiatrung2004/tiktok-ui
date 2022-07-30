@@ -7,20 +7,23 @@ import {
     faKeyboard,
     faPlus
 } from '@fortawesome/free-solid-svg-icons';
+import { faTiktok } from '@fortawesome/free-brands-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import 'tippy.js/dist/tippy.css';
+import { Link } from 'react-router-dom';
+
 import { images } from '~/assets/images';
 import Button from '~/component/Button';
-import Menu from '~/component/poper/Menu';
-import styles from './header.module.scss';
-import { faTiktok } from '@fortawesome/free-brands-svg-icons';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { sizes } from '~/util/constant';
 import { InboxIcon, MessageIcon } from '~/component/icons';
-import Search from '~/component/Layouts/component/Search';
 import Image from '~/component/Image';
+import Search from '~/component/Layouts/component/Search';
+import Menu from '~/component/poper/Menu';
+import { sizes } from '~/util/constant';
+import styles from './header.module.scss';
+import { default as routesConfig } from '~/configs/routes';
 
 const cx = classNames.bind(styles);
 
@@ -86,7 +89,9 @@ function Header() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <img src={images.logo} alt="logo" />
+                <Link to={routesConfig.home}>
+                    <img src={images.logo} alt="logo" />
+                </Link>
                 <Search />
                 <div className={cx('action')}>
                     {user ? (
@@ -119,7 +124,7 @@ function Header() {
                     <Menu className={cx('menu-list')} items={user ? USER_LIST : MENU_LIST} onChange={changeHandle}>
                         {user ? (
                             <Image
-                                src="https://p16-sign-sg.tiktokcdn.com/aweme/720x720/tiktok-obj/1665504715984898.jpeg?x-expires=1657022400&x-signature=kC7IIa2gJG7ErOFurDA6HRDtUUs%3D"
+                                src="https://static.fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
                                 alt="Nguyễn Văn A"
                                 className={cx('user-avatar')}
                             />
