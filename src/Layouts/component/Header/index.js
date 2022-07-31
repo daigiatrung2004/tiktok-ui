@@ -19,11 +19,11 @@ import { images } from '~/assets/images';
 import Button from '~/component/Button';
 import { InboxIcon, MessageIcon } from '~/component/icons';
 import Image from '~/component/Image';
-import Search from '~/component/Layouts/component/Search';
+import Search from '~/Layouts/component/Search';
 import Menu from '~/component/poper/Menu';
-import { sizes } from '~/util/constant';
+import { sizes } from '~/utils/constant';
 import styles from './header.module.scss';
-import { default as routesConfig } from '~/configs/routes';
+import config from '~/configs';
 
 const cx = classNames.bind(styles);
 
@@ -89,7 +89,7 @@ function Header() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link to={routesConfig.home}>
+                <Link to={config.routes.home}>
                     <img src={images.logo} alt="logo" />
                 </Link>
                 <Search />
