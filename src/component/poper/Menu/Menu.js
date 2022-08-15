@@ -8,7 +8,7 @@ import classNames from 'classnames/bind';
 
 import style from './menu.module.scss';
 import MenuItems from './MenuItems';
-import Header from './header';
+import Header from './Header';
 
 const cx = classNames.bind(style);
 
@@ -37,6 +37,22 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
         });
     };
 
+    // reset go to first page
+    const handleReset = () => setHistory((prev) => prev.slice(0, 1));
+
+    const handleBack = () => setHistory((prev) => prev.slice(0, prev.length - 1));
+
+    const searchResult = (attrs) => (
+        <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
+            <PopperWrapper className={cx('menu-items')}>
+                {history.length > 1 && (
+                    <Header icon={<FontAwesomeIcon icon={faChevronLeft} />} title={current.title} onBack={handleBack} />
+                )}
+                {menuItems()}
+            </PopperWrapper>
+        </div>
+    );
+
     return (
         <Tippy
             delay={[0, 700]}
@@ -44,23 +60,8 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
             placement={'bottom-end'}
             hideOnClick={hideOnClick}
             interactive
-            onHide={() => setHistory((prev) => prev.slice(0, 1))}
-            render={(attrs) => (
-                <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
-                    <PopperWrapper className={cx('menu-items')}>
-                        {history.length > 1 && (
-                            <Header
-                                icon={<FontAwesomeIcon icon={faChevronLeft} />}
-                                title={current.title}
-                                onBack={() => {
-                                    setHistory((prev) => prev.slice(0, prev.length - 1));
-                                }}
-                            />
-                        )}
-                        {menuItems()}
-                    </PopperWrapper>
-                </div>
-            )}
+            onHide={handleReset}
+            render={searchResult}
         >
             {children}
         </Tippy>

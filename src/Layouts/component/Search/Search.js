@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import { forwardRef, useEffect, useState } from 'react';
 
-import AccountItems from '~/component/AccountItems';
+import { SearchAccountsList } from '~/component/AccountItems';
 import { CloseIcon, LookupIcon } from '~/component/Icons';
 import { Wrapper as PopperWrapper } from '~/component/poper';
 import { useDebounce } from '~/hooks';
@@ -16,15 +16,15 @@ const cx = classNames.bind(styles);
 
 const Search = forwardRef((props, ref) => {
     const [searchAccounts, setSearchAccounts] = useState([]);
-    const [showResult, setShowResult] = useState(true);
+    const [showResult, setShowResult] = useState(false);
     const [queryParam, setQueryParam] = useState('');
     const [loading, setLoading] = useState(false);
     const inputRef = useRef();
 
-    const debounce = useDebounce(queryParam, 400);
+    const debounceValue = useDebounce(queryParam, 400);
 
     useEffect(() => {
-        if (!debounce.trim()) {
+        if (!debounceValue.trim()) {
             setSearchAccounts([]);
             return;
         }
@@ -32,7 +32,7 @@ const Search = forwardRef((props, ref) => {
         const fetchApi = async () => {
             setLoading(true);
             try {
-                const result = await search(debounce);
+                const result = await search(debounceValue);
                 setLoading(false);
                 setSearchAccounts(result);
             } catch {
@@ -42,7 +42,7 @@ const Search = forwardRef((props, ref) => {
         };
 
         fetchApi();
-    }, [debounce]);
+    }, [debounceValue]);
 
     const handleSearchInput = (e) => {
         let searchKeyWord = e.target.value;
@@ -52,7 +52,7 @@ const Search = forwardRef((props, ref) => {
         }
     };
 
-    const clearHandle = () => {
+    const handleClear = () => {
         setSearchAccounts([]);
         setQueryParam('');
         inputRef.current.focus();
@@ -67,9 +67,7 @@ const Search = forwardRef((props, ref) => {
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                         <PopperWrapper>
                             <div className={cx('accountTitle')}>Tài khoản</div>
-                            {searchAccounts.map((data) => (
-                                <AccountItems data={data} key={data.id} />
-                            ))}
+                            {<SearchAccountsList data={searchAccounts} />}
                         </PopperWrapper>
                     </div>
                 )}
@@ -87,7 +85,7 @@ const Search = forwardRef((props, ref) => {
                         onFocus={() => setShowResult(true)}
                     />
                     {!!queryParam && !loading && (
-                        <button className={cx('clear')} onClick={clearHandle}>
+                        <button className={cx('clear')} onClick={handleClear}>
                             <CloseIcon />
                         </button>
                     )}

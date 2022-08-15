@@ -59,7 +59,7 @@ function Header() {
         console.log(menuItem);
     };
 
-    const user = true;
+    const user = false;
 
     const USER_LIST = [
         {
@@ -116,7 +116,7 @@ function Header() {
                             >
                                 Tải lên
                             </Button>
-                            <Button primary sizeStyle={sizes.m} onClick={() => alert('xin chao')}>
+                            <Button to="/" primary sizeStyle={sizes.m} onClick={() => alert('xin chao')}>
                                 Đăng nhập
                             </Button>
                         </>
