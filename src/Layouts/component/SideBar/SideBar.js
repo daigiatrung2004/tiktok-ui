@@ -3,6 +3,7 @@ import MenuItems from './MenuItems';
 import classNames from 'classnames/bind';
 import styles from './sidebar.module.scss';
 import configs from '~/configs';
+import SuggestedAccounts from '~/component/SuggestedAccounts';
 import {
     HomeIcon,
     HomeAcitveIcon,
@@ -33,6 +34,7 @@ function SideBar() {
                 />
                 <MenuItems title="LIVE" to={configs.routes.live} icon={<LiveIcon />} activeIcon={<LiveAcitveIcon />} />
             </Menu>
+            <SuggestedAccounts label="Tài khoản được đề xuất" />
         </aside>
     );
 }

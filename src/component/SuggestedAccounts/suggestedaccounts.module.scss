@@ -1,0 +1,121 @@
+.wrapper {
+    padding-top: 1.6rem;
+    padding-bottom: 1.6rem;
+}
+
+.label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #161823bf;
+}
+
+// suggestedaccounts
+.item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.info {
+    margin-left: 12px;
+    flex: 1;
+}
+
+.nickname {
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+.name {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #161823bf;
+}
+
+.check {
+    margin-left: 6px;
+    color: #20d5ec;
+}
+
+.more {
+    color: #fe2c55;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+// preview
+.preview {
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
+    border-radius: 8px;
+    width: 320px;
+    box-sizing: border-box;
+    font-size: 14px;
+    max-height: 171px;
+}
+
+.preview-image {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.priview-wrapper {
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.body {
+}
+
+.nickname {
+}
+
+.check {
+    width: 14px;
+    height: 14px;
+}
+
+.name {
+}
+
+.footer {
+    margin-right: 6px;
+    font-size: 16px;
+    line-height: 1;
+    text-rendering: optimizeSpeed;
+    color: #161823bf;
+}
+
+.count {
+    margin-right: 6px;
+    font-size: 17px;
+    color: black;
+}
+
+.btn-follow {
+    width: 109px;
+    height: 34px;
+}
